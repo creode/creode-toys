@@ -1,6 +1,7 @@
 config:
-    docker: { name: toys, package: creode/toys, port: '099', sync: { active: false, version: '2', options: { verbose: true }, syncs: {  } }, compose: { version: '2', services: { mysql: { active: false }, php: { active: true }, mailcatcher: { active: false }, redis: { active: false }, drush: { active: false } } } }
+    docker: { name: toys, package: creode/toys, port: '099', sync: { active: false, version: '2', options: { verbose: true }, syncs: {  } }, compose: { version: '2', services: { mysql: { active: true }, php: { active: true, links: [mysql, mailcatcher] }, mailcatcher: { active: true }, redis: { active: false }, drush: { active: false } } } }
     dir: { wrapper-repo: false, src: src }
-    environment: { type: docker, framework: drupal7 }
+    environment: { type: docker, framework: wordpress }
     backups: { user: creode, host: 192.168.0.97, port: '22', db-dir: n/a, db-file: weekly-backup.sql, media-dir: n/a, media-file: weekly-backup.tar }
+    boilerplates: { magento2: { boilerplates: ['git@codebasehq.com:creode/boilerplates/bp-mage2.git'] }, magento1: { boilerplates: ['git@codebasehq.com:creode/boilerplates/bp-mage1.git', git@somewhere.git] }, drupal7: { boilerplates: ['git@codebasehq.com:creode/boilerplates/bp-drupal7.git'] }, drupal8: { boilerplates: ['git@codebasehq.com:creode/boilerplates/bp-drupal8.git'] }, wordpress: { boilerplates: ['git@codebasehq.com:creode/boilerplates/bp-wp.git'] } }
 version: '2'
